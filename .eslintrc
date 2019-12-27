@@ -1,0 +1,48 @@
+{
+  "globals": {
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "env": {                           // http://eslint.org/docs/user-guide/configuring.html#specifying-environments
+    "browser": true,                 // browser global variables
+    "node": true
+  },
+  "parser": "babel-eslint",          // https://github.com/babel/babel-eslint
+  "extends": "google",
+  "rules": {
+    "brace-style": ["error", "1tbs"],
+    "comma-dangle": 0,
+    "consistent-return": "error",
+    "curly": "error",
+    "eqeqeq": ["error", "always", {"null": "ignore"}],
+    "eol-last": 0,
+    // "import/extensions": 1,
+    "indent": ["error", 2],
+    "jsx-quotes": 1,
+    "max-len": ["warn", 120],
+    "new-cap": 0,
+    "no-alert": 1,
+    "no-console": "warn",
+    "no-debugger": 1,
+    "no-extend-native": 0,
+    "no-lone-blocks": 0,
+    "no-magic-numbers": ["warn", {
+      "ignore": [0, 1],
+      "ignoreArrayIndexes": true,
+      "detectObjects": false
+    }],
+    "no-underscore-dangle": 0,
+    "no-unreachable": 1,
+    "no-var": 0,
+    "one-var": 0,
+    "no-undef": 1,
+    "prefer-rest-params": 0,
+    "prefer-spread": 0,
+    "quotes": ["error", "single"],
+    "radix": "error",
+    "require-jsdoc": 0,
+    "semi": [1, "always"],
+    "space-infix-ops": "error"
+  }
+}

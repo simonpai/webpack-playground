@@ -1,0 +1,28 @@
+{
+  "name": "webpack-playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development webpack-dev-server",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonpai/webpack-playground.git"
+  },
+  "author": "simonpai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/simonpai/webpack-playground/issues"
+  },
+  "homepage": "https://github.com/simonpai/webpack-playground#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  }
+}
