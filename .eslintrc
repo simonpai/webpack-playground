@@ -11,6 +11,7 @@
   "parser": "babel-eslint",          // https://github.com/babel/babel-eslint
   "extends": "google",
   "rules": {
+    "arrow-parens": ["error", "as-needed"],
     "brace-style": ["error", "1tbs"],
     "comma-dangle": 0,
     "consistent-return": "error",
