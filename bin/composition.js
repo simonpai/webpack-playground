@@ -17,20 +17,6 @@ const config = {
 };
 
 const WEBPACK_MODULE_PREFIX = './node_modules/webpack/';
-// const WEBPACK_MODULE_PREFIX_LENGTH = WEBPACK_MODULE_PREFIX.length;
-
-function reduceModuleStatsAccumulator() {
-  return {
-    count: 0,
-    size: 0
-  };
-}
-
-function reduceModuleStatsIteratee(acc, m) {
-  acc.count++;
-  acc.size += m.size;
-  return acc;
-}
 
 function classify(m) {
   const id = m.id;
