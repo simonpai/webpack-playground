@@ -6,7 +6,8 @@
   },
   "env": {                           // http://eslint.org/docs/user-guide/configuring.html#specifying-environments
     "browser": true,                 // browser global variables
-    "node": true
+    "node": true,
+    "es6": true
   },
   "parser": "babel-eslint",          // https://github.com/babel/babel-eslint
   "extends": "google",
@@ -24,7 +25,7 @@
     "max-len": ["warn", 120],
     "new-cap": 0,
     "no-alert": 1,
-    "no-console": "warn",
+    "no-console": 0,
     "no-debugger": 1,
     "no-extend-native": 0,
     "no-lone-blocks": 0,
