@@ -6,6 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server",
     "build": "webpack",
+    "profile": "webpack --progress --profile --json > ./dist/stats.json",
     "analyze:composition": "node bin/composition.js"
   },
   "repository": {

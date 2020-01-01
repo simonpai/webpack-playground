@@ -31,11 +31,11 @@ const WEBPACK_LIBS = new Set([
   'schema-utils'
 ]);
 
-function classify(m) {
+function classify(context, m) {
   const segs = m.segs;
   switch (segs[0]) {
   case 'webpack':
-    return classifyWebpack(m);
+    return classifyWebpack(context, m);
   case 'webpack-cli':
     return 'highlevel';
   case 'webpack-dev-server':
@@ -49,8 +49,12 @@ function classify(m) {
   }
 }
 
-function classifyWebpack(m) {
+function classifyWebpack(context, m) {
   const segs = m.segs;
+  if (!segs) {
+    console.log(m);
+    return 'other';
+  }
   const filename = segs[segs.length - 1];
   if (filename.endsWith('Plugin.js')) {
     return 'plugin';
@@ -59,8 +63,7 @@ function classifyWebpack(m) {
     return 'highlevel';
   }
   if (segs[1] !== 'lib' || segs.length < 2) { // eslint-disable-line no-magic-numbers
-    // TODO
-    return 'core';
+    return classifyByUpstream(context, m);
   }
   switch (segs[2]) {
   case 'performance':
@@ -69,10 +72,22 @@ function classifyWebpack(m) {
   case 'webworker':
     return 'plugin';
   case 'util':
-    return 'util';
   default:
     return 'core';
   }
+}
+
+function classifyByUpstream(context, m) {
+  const reasons = m.reasons.filter(r => r.moduleId);
+  if (reasons.length !== 1) {
+    return 'core'; // or util, but anyway
+  }
+  const upstream = context.hash[reasons[0].moduleId];
+  if (!upstream) {
+    console.log(m);
+    return 'unknown';
+  }
+  return classifyWebpack(context, upstream);
 }
 
 const statsToJsonConfig = {
@@ -92,9 +107,16 @@ function getModules(stats) {
 webpack$(webpackConfig)
   .then(stats => {
     const modules = getModules(stats).filter(m => WEBPACK_LIBS.has(m.segs[0]));
+    const moduleHash = modules.reduce((acc, m) => {
+      acc[m.id] = m;
+      return acc;
+    }, {});
+    const context = {
+      hash: moduleHash
+    };
 
     const summaryHash = modules.reduce((acc, m) => {
-      const type = classify(m);
+      const type = classify(context, m);
       const stat = acc[type] || (acc[type] = {type: type, count: 0, size: 0});
       stat.count++;
       stat.size += m.size;
