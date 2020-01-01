@@ -6,18 +6,18 @@ const {promisify, percent} = require('./util');
 const webpack$ = promisify(webpack);
 const webpackRoot = pathAPI.resolve(__dirname, '../node_modules/webpack');
 
-const baseConfig = {
+const webpackConfig = {
   mode: 'development',
   target: 'node',
   profile: true,
   plugins: [
     new NoEmitPlugin()
+  ],
+  entry: [
+    pathAPI.resolve(webpackRoot, 'lib/webpack.js'),
+    pathAPI.resolve(webpackRoot, 'lib/webpack.web.js')
   ]
 };
-
-const webpackConfig = Object.assign({
-  entry: pathAPI.resolve(webpackRoot, 'lib/webpack.js')
-}, baseConfig);
 
 const WEBPACK_LIBS = new Set([
   'webpack',
@@ -82,7 +82,7 @@ const statsToJsonConfig = {
 };
 
 function getModules(stats) {
-  const modules = stats.toJson(statsToJsonConfig).modules;
+  const modules = stats.toJson(statsToJsonConfig).modules.filter(m => m.id);
   for (const m of modules) {
     m.segs = m.id.split('/').slice(2); // eslint-disable-line no-magic-numbers
   }
