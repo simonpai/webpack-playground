@@ -4,7 +4,7 @@ const pathAPI = require('path');
 module.exports = (env, argv) => ({
   mode: 'development',
   context: pathAPI.resolve(__dirname),
-  entry: './src/index.js',
+  entry: ['./src/polyfill', './src'],
   target: 'web',
   output: {
     path: pathAPI.resolve(__dirname, 'dist'),
