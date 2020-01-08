@@ -1,11 +1,7 @@
-require('./a');
-require('./b');
-
-var locales = require('./locale');
-
+var locales = require.context('./locale', true, /\.json$/);
 console.log(locales.keys());
-console.log(locales('./en.json'));
+console.log(locales.keys().map(locales));
 
-var animal = require('./animal');
+var animal = require.context('null-loader!./animal', true, /\.sub.js$/);
 console.log(animal.keys());
-console.log(animal(animal.keys()[0]));
+console.log(animal.keys().map(animal));
