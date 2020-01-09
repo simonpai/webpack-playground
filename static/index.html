@@ -37,6 +37,10 @@
       color: #888;
     }
   </style>
+  <script>
+    // skrew up native Promise
+    window.Promise = undefined;
+  </script>
 </head>
 <body>
   <div id="display" class="container">

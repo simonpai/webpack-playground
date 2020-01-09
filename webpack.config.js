@@ -15,6 +15,21 @@ module.exports = (env, argv) => ({
     filename: 'bundle.js',
     publicPath: '/dist'
   },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: 'pseudo-polyfill-loader',
+        enforce: 'post'
+      }
+    ]
+  },
+  resolve: {
+    alias: {
+      promise: pathAPI.resolve(__dirname, 'src/polyfill/promise'),
+      bluebird: 'yaku'
+    }
+  },
   resolveLoader: {
     modules: [
       'node_modules',
