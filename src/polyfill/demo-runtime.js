@@ -6,14 +6,14 @@ window.step = function() {
   if (!fn) {
     return false;
   }
-  fn();
+  fn(); // TODO: error handling
   fns.i++;
   return true;
 };
 
 window.play = function() {
   if (window.step()) {
-    setTimeout(window.play, 1000);
+    setTimeout(window.play, 1000); // eslint-disable-line no-magic-numbers
   }
 };
 
